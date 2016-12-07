@@ -1,0 +1,1163 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[francais]{babel}
+\usepackage[Lenny]{fncychap} %Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+\usepackage{mathpazo}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage[a4paper, width=150mm, top=25mm, bottom=25mm]{geometry}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[final]{pdfpages}
+\setlist[itemize]{label=\textbullet}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[C]{\leftmark}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+\includepdf[pages=1]{Page_garde.pdf} 
+
+\pagenumbering{gobble}
+
+%Sommaire
+\renewcommand{\contentsname}{Sommaire}
+\tableofcontents
+\includepdf[pages=7-8]{tables/withFigure.pdf}
+
+
+%les remerciements
+\chapter*{Remerciements}
+\Large
+%\setlength{\parindent}{0.5cm} 
+Avant tout, Il semble approprié d'entamer ce mémoire par des remerciements, d’abord au bon dieu de nous avoir accordé la force et le courage de mener à terme ce modeste travail.\\
+
+Toute notre reconnaissance et toute notre gratitude vont vers Mr Kacem CHERFA, notre promoteur, qui nous a aidé et accompagné tout au long de cette expérience professionnelle avec beaucoup de patience et d'enthousiasme.\\
+
+Nos profondes remerciements s’adressent à Mme Lamia BERKANI, notre enseignante à l'USTHB, de nous avoir guidé et orienté durant les différentes étapes de ce projet avec ça pédagogie et ça ferveur.\\
+
+Nous remercions également les membres du jury d’avoir accepté d’examiner et de juger notre travail.\\
+
+Que tous ceux qui, de près ou de loin ont contribué, par leurs conseils, leurs
+encouragements ou leur amitié à l’aboutissement de ce travail, trouvent ici
+l’expression de notre profonde reconnaissance.\\
+
+Pour leur encouragement, leur soutien moral et la patience qu’ils nous ont
+manifestée durant toute l’année, nous remercions fortement tous les membres de
+nos familles.\\
+
+Enfin remercier nos parents serait se répéter, parfois pour exprimer plus que ce qu’on a envie de dire on a recours au silence.
+
+\normalsize
+%\noindent
+%les résumé
+\chapter*{Résumé}
+Le présent mémoire rend compte de notre projet de fin d’études au sein de COSIDER CANALISATIONS et au département Informatique de l’Université des Sciences et de la Technologie Houari Boumediene.\\ Il
+s’agit de concevoir et de développer un système de gestion pour la direction des approvisionnements et de la sous-traitance DAST, qui se trouve face à plusieurs problèmes de gestion.\\
+Notre solution informatique est une application web riche en fonctionnalités, accessible et parfaitement adaptée aux besoins des employés.\\
+Certaines technologies et librairies sont employées et plusieurs langages de programmations tels que le \emph{php}, le \emph{XML} ou le \emph{JavaScript} ont été utilisées. Une base de données relationnelles pour modéliser les informations est également mise en place.\\
+Le déroulement du projet s‘est effectué suivant trois étapes :
+\begin{itemize}
+    \item Étude approfondie de l'existant dans l'entreprise,
+    \item Conception et modélisation du système,
+    \item Réalisation de l'application tout en respectant les objectifs prédéfinis.
+\end{itemize}
+\vspace*{1cm}
+Mots clés : S.I , UML , Application Web , Apache , MySql , 
+%le résumé en langue Anglaise
+\chapter*{Abstract}
+The present dissertation of our graduation project within COSIDAR CANALISATIONS and the departement
+of computer science of the univeristy of science and technology houari boumadien.\\
+It’s about conceiving and developping a managemenent system for the direction of supplies and subcontacting DAST which is facing several management problems.\\
+Our IT solution is a rich web app , accessible and perfectly adapted to the needs of the employees.
+Some technologies and libraries are employed and differents programming languages such
+the \emph{PHP}, \emph{XML} and \emph{JavaScript} were used. A relational database is also introduced.\\
+The project progress went through three major steps :
+\begin{itemize} 
+       \item A depth study of the existing within the enterprise,
+       \item Design and system modeling,
+       \item Realisation of the app while respecting the defined objectives.
+\end{itemize}
+\vspace*{1cm}
+key words : S.I , UML , Web Application , Apache , MySql
+
+
+%liste des figures\listoffigures
+%liste des tableaux\listoftables
+%introduction generale
+\chapter*{Introduction générale}
+\pagenumbering{arabic}
+L’informatique est un domaine d'activité scientifique, technique et industriel dont les champs d'application ne cessent de se développer.
+Elle a progressé plus que toutes autres disciplines, d’ailleurs, elle est au cœur des plus grandes innovations des 50 dernières années.
+
+Dans les entreprises, l’informatique et ses différentes activités sont devenues un outil clé de la performance des processus, de la qualité des produits et de la sécurité du parc informationnel.
+
+Pour la plus part des entreprises du 21 éme siècle, l'information est considérée comme la principale ressource de créativité, cela est possible grâce à l'outil informatique utilisé de plus en plus pour le stockage, l'analyse et la transmission de cette ressource incontournable.
+
+Les entreprises algériennes ont déjà pris conscience de ces avancés technologiques et de l'importance d'une bonne gestion informatique ce qui va certainement pousser les professionnelles du domaine à améliorer la qualité des services et proposer des solutions de plus en plus innovantes.
+
+Les responsables de COSIDER CANALISATIONS de leur part, ont intégré plusieurs solutions informatiques qui ont pour vocation d’optimiser l’organisation au sein de l’entreprise et d’améliorer le rendement des différentes équipes.
+
+Mais contrairement à la gestion des finances et des ressources humaines, la gestion de l’approvisionnement n'a pas été mise en valeur. Celle-ci, très perfectible, demandait encore à être revue et retravaillée.
+
+Cependant, il existe un échange important de flux d'informations au sein de la Direction des approvisionnements et de la sous-traitance entre les différents services, mais aussi avec les autres directions de la filiale sachant que les moyens de communication utilisés sont peu fiables, et la sauvegarde des données et des solutions est inexistante ce qui engendre une difficulté d’avoir l’information sure et fiable en temps réel. De plus, aucun outil d'aide à la décision n'est mis en place, et aucune évaluation du rendement des employés n'est possible.
+
+C’est la raison principal pour laquelle la DAST a jugé utile de nous confier la tâche d’élaborer un système qui puisse s’adapter aux réels besoins de ces employés.
+
+L’objectif principal du projet consiste à concevoir et réaliser une plate-forme qui permettra de répondre aux besoins du personnel de la direction, afin d’améliorer leur rendement et leur productivité. Et ce, tout en essayant de minimiser le risque de perte d'informations grâce à la sauvegarde et la traçabilité des données, la réduction de la charge de travail, l'optimisation des durées de réalisations, la garantie d'un traitement meilleur des demandes d’approvisionnements et le fait de permettre aux responsables de connaître et d’évaluer le rendement des employés.
+
+Notre mémoire est structuré comme suit :
+\begin{itemize}
+    \item \textbf{Chapitre 1} : présentation de l'organisme d’accueil et les différents processus de travail.
+    \item \textbf{Chapitre 2} : analyse et conception détaillée du système.
+    \item \textbf{Chapitre 3} : présentation de notre solution informatique et des outils utilisées. 
+\end{itemize}
+
+%Tout au long de notre étude, nous allons présenter l’organisme d’accueil COSIDER Groupe, la filial COSIDER CANALISATIONS et la Direction des Approvisionnement et de la Sous-traitance en particulier ainsi que les différents tâches accomplies par cette direction, ce qui nous permettra en définitif de déterminer les réels besoins que l’application devra satisfaire.
+%Nous présenterons également la méthode de conception abordée, ainsi que les différents outils utilisée pour la réalisation.Nous clôturent notre étude par une brève présentation de notre solution informatique. 
+
+%Chapter One : Etude de l'existant
+\chapter{Étude de l'existant}
+\newpage 
+\section{Introduction}
+L’étude de l’existant est une phase importante pour bien comprendre le processus de travail et être en mesure de définir ses objectifs.\\Il sera question, dans ce chapitre, d’effectuer une description de l’existant par la présentation de l’organisme d’accueil et les principaux services impliqués, les postes concerné, et les différentes tâches accomplies ainsi que les moyens disponibles.\\ 
+Nous allons conclure ce chapitre par quelques remarques et critiques qui concerne le système d’informations de COSIDER CANALISATIONS.
+
+\section{Présentation de l’organisme d’accueil}
+\vspace*{0.2cm}
+\subsection{COSIDER GROUPE}
+Sous forme de société d’économie mixte, COSIDER a été créée le 1er janvier 1979 par la société nationale de sidérurgie (S.N.S) et le groupe Danois Christiani et Nielsen.
+
+En 1982, COSIDER devient filiale à 100\% de la S.N.S, et en 1984 elle est transformée en entreprise nationale placée sous tutelle du Ministère de l’Industrie Lourde.
+
+COSIDER fut transformée en société par action en octobre 1989.
+Elle a su créer et exploiter divers opportunités qui lui ont permis de développer et d’élargir son domaine d’intervention vers d’autres activités ne relevant pas uniquement de la branche du bâtiment et des travaux publics.
+
+COSIDER est le plus grand Groupe Algérien de B.T.P.H. Aujourd’hui, son capital social est de 17 800 000 000 DA, est organisé en un groupe de sociétés (08) filiales.
+
+Ces performances sont le résultat d’un sens aigu de l’organisation et de la rigueur, c’est également le résultat d’une culture d’entreprise forte qui a permis de réunir les meilleurs talents pour constituer des équipes de collaborateurs fortement motivés. \cite{cosider}
+\vspace*{0.5cm}
+\subsection{COSIDER CANALISATIONS}
+COSIDER CANALISATIONS, est issue de la scission de COSIDER Travaux Publics depuis janvier 2004.
+
+Elle est dotée actuellement d’un capital social de 4 000 000 000 de Dinars.
+La société est certifiée aux normes ISO 9001 depuis 2004 .
+
+La société est spécialisée dans la réalisation des grandes infrastructures relevant des domaines stratégiques , d’énergie et de hydraulique notamment en matière de transport par canalisation et pipe line.la société compte dans son palmarès un grand nombre de réalisations d’envergure qui la consacre parmi les leaders dans son domaine concurrentiel.
+\cite{cosider1}
+
+\subsubsection{Ses activités}
+\begin{itemize}
+    \item Le transport des hydrocarbures liquides et gazeux par pipe-line.
+    \item Les grands transferts d’eau par canalisation.
+    \item Les réseaux de distributions d’eau potables dans les grandes agglomérations.
+    \item Le transport d’énergie via la réalisation du génie civil des postes électriques.
+\end{itemize}
+
+\newpage
+\subsubsection{Organigramme de COSIDER CANALISATIONS}
+\vspace*{0.5cm}
+\begin{figure}[h]
+        \centering
+            \includegraphics[height=250pt,width=450pt]{images/org11.png}
+        \caption{Organigramme COSIDER CANALISATIONS}
+ \end{figure}
+ \vspace*{1cm}
+NB : Notre champ d’étude est focalisé sur la \textbf{DAST}\protect\footnote{Direction des Approvisionnements et de la sous-traitance}, mais vus qu’on a besoin de plusieurs données provenant des autres directions, le champ d’étude est élargi sur :
+
+\begin{itemize}
+    \item \textbf{DTH} : Direction des travaux hydrauliques.
+    \item \textbf{DHC} : Direction des hydrocarbures.
+    \item \textbf{DML} : Direction du matériels et logistique.
+    \item \textbf{DMC} : Direction des moyens communs.
+\end{itemize}
+
+\newpage
+\subsection{Présentations de la structure d’accueil DAST}
+ \vspace*{0.5cm}
+
+La DAST est une direction de très grande importance, ça principal mission et la gestion de la chaîne logistique.
+La mise en œuvre d'une gestion opérationnelle est la vocation de ces responsables, afin de respecter l'enchaînement des tâches sur le terrain ainsi que le bon fonctionnement du système logistique, tel que fixé par le «cahier des charges».\\La direction est dotée d’un personnel compétant qui répond à toutes contraintes environnantes.\\
+La règle première est de livrer de la marchandise, au bon moment, au bon prix, et au meilleur coût selon le choix du demandeur.
+
+\subsubsection{Organigramme de la DAST}
+ \vspace*{0.7cm}
+\begin{figure}[h]
+        \centering
+             \includegraphics[height=250pt,width=465pt]{images/org22.png}
+        \caption{Organigramme DAST}
+ \end{figure}
+
+\newpage
+\section{Étude des procédures}
+
+\subsection{Diagramme de flux de la procédure d’Appel d’offre}
+
+\begin{figure}[h]
+        \centering
+            \includegraphics[height=180pt]{images/1.PNG}
+        \caption{Diagramme de flux AO}
+ \end{figure}
+
+\begin{enumerate}
+    \item Demande d’approvisionnement
+    \item Demande d’approvisionnement + Vérification + Affectation
+    \item Cahier des charges
+    \item VISA du Groupe COSIDER
+    \item Placard publicitaire
+    \item Cahier des charges
+    \item Dépôt des offres
+    \item Transmissions des offres reçus
+    \item Offres + Vérifications
+    \item Décision et choix du fournisseur
+    \item Transmission de la décision
+    \item Résultats de l'analyse technique
+    \item Désignation fournisseur + Affectation
+    \item Contrat
+    \item Fourniture
+\end{enumerate}
+
+\newpage
+\subsection{Diagramme de flux de la procédure de Consultation}
+ \begin{figure}[h]
+        \centering
+            \includegraphics[height=180pt]{images/2.PNG}
+        \caption{Diagramme de flux CL}
+ \end{figure}
+
+
+\begin{enumerate}
+    \item Demande d’approvisionnement
+    \item Demande d’approvisionnement + Vérification + Affectation
+    \item Lancement de la consultation + cahier des charges
+    \item Dépôt des offres
+    \item Transmissions des offres reçus
+    \item Offres + Vérifications
+    \item Transmission de la décision
+    \item Transmission des offres technique
+    \item Résultat de l’analyse technique
+    \item Contrat 
+    \item Fourniture
+\end{enumerate}
+
+\newpage
+\section{Étude des postes de travail}
+Un poste de travail est un endroit dans lequel un employé effectue un travail grâce à des outils qui sont mis à sa disposition.
+
+Pour être en mesures de comprendre les procédures administratives dans un organisme quelconque, il est important d’étudier les postes concerné qui apparaissant dans notre champ d’étude.
+
+Dans ce qui suit, sera présentée l’étude du poste de Chef de service approvisionnements\\
+(Administrateur)\protect\footnote{le chef de service d’approvisionnements est désigné pour administrer le système} :
+
+   \begin{figure}[h]
+       \centering
+          \includegraphics[height=160pt,width=\linewidth]{images/3.PNG}
+    \end{figure}
+\vspace{0.3cm}
+    \begin{figure}[h]
+        \centering
+            \includegraphics[width=\linewidth]{images/9.png}
+    \end{figure}
+    
+\newpage
+\section{Étude des documents}
+Un document administratif se définit comme toute information, sous quelque forme que ce soit, dont une administration dispose.
+
+Nous allons étudier le document le plus récurrent et important dans notre champ d’étude, la demande d’approvisionnement :
+    
+    \begin{figure}[h]
+        \centering
+            \includegraphics[height=140pt,width=\linewidth]{images/7.png}
+    \end{figure}
+\vspace{0.4cm}
+    \begin{figure}[h]
+        \centering
+            \includegraphics[height=380pt,width=\linewidth]{images/8.png}
+    \end{figure}
+    
+\newpage
+\section{Critiques et remarques}
+Nous avons constaté après les entretiens passée avec les différents acteurs concernés qu’il y avait une importante collaboration entre les directions en général mais aussi entre les services de la même direction. Ceci engendre un échange considérable d’informations entre les employés. Or aucun outil pour la gestion des flux d’informations interne n’est implémenté.
+
+On remarque aussi qu’il était impossible aux employés de consultés l’état d’avancement de leurs travail et que la méthodologie existante, basé sur l’échange de mails et d’appels téléphonique et l'envoi des courriers, entraîne un manque de précision, des oublis et des retards dans le traitement des demandes.
+
+L’outil d’archivage mis à la disposition et très obsolète, ce qui entraîne une éventuelle perte de temps et d’informations.
+
+Avec cette méthodologie, aucune évaluation des employés n’est fournie .Or, chaque responsable a besoin de connaître le rendement de son équipe.
+\vspace*{1cm}
+\section{Conclusion}
+A cette étape, nous avons réussi grâce à l’étude de l'existant effectué au sein de l'organisme d’accueil, à définir les différents tâches et analyser la plupart des procédures suivis, et cela tout au long de la période du stage pratique.\\
+En d’autres termes nous connaissons précisément ce que chaque employé fait et à quel moment.\\ Cette étude nous a donc permet de connaître  d’une manière plus précise les réels besoins afin de prévoir les spécifications fonctionnelles de notre conception et de mener à bien notre projet.\\ 
+Le prochain point aborder quant à lui, présente notre conception.
+
+%Chapter Two : Conception
+\chapter{Conception}
+\newpage
+\section{Introduction}
+La réalisation d’un logiciel ou d’un système informatique doit être  obligatoirement précédée d’une étape d’analyse et de conception qui a pour objectif de définir et de formaliser les étapes nécessaires du développement de l’application afin de rendre cette dernière plus fidèle aux besoins du client.
+
+La phase d’analyse permet de définir les résultats attendus, en termes de fonctionnalités, tandis que la phase de conception décrit d’une manière claire et précise, le fonctionnement du futur système  en utilisant un langage de modélisation. 
+
+Pour cela, nous avons choisi le langage UML (Unified Modeling Language).
+UML  est un langage de modélisation utilisé pour la conception de logiciel. 
+Il permet de déterminer les différents acteurs de notre système, leurs rôles, et aussi les classes et les objets de notre base de données, UML permet de modéliser sous forme graphique, claire et compréhensible les fonctionnalités de notre application.
+\section{Définition des acteurs}
+Les acteurs sont des entités externes qui auront accès à l’application. Dans notre cas, les acteurs sont définis comme suit :
+
+\begin{itemize}
+    \item \textbf{Employé (DAST) :} Acteur qui dispose d’un compte personnel, il est chargé du traitement des demandes d’approvisionnement, établissement des cahiers des charges et des contrats, il peut également consulter l’historique.
+    \\
+    \item \textbf{Employé-Client (DHC/DTH/DMC/DML) :} Acteur qui dispose d’un compte personnel, il effectue un type d’opérations précis  sur les demandes(dépôt, recherche, consultation).
+    \\
+    \item \textbf{Administrateur :} Il se charge de la création des comptes, la vérification et l’affectation des demandes ainsi que la mise à jour du site et de la base de données.
+    \\
+    \item \textbf{Responsable :} Acteur qui peut consulter le rendement des membres de son équipe.\\\\\\\\
+\end{itemize}
+\section{Modélisation des cas d'utilisations}
+Le diagramme de cas d’utilisations décrit les fonctionnalités d’un système d’un point de vue utilisateur, sous la forme d’action et de réaction. L’ensemble des fonctionnalités est déterminé en examinant les besoins fonctionnels de tous les utilisateurs potentiels.
+
+Il synthétise alors les résultats de cette étude en faisant apparaître tous les acteurs, tous les cas d’utilisations et les relations entre ses divers éléments.\cite{gl1}
+
+\newpage
+\subsection{Gestion des employés, des comptes et mise à jour du site}
+Le diagramme sur la figure \ref{a} présente le rôle de l’administrateur qui s’occupe non seulement de l’administration, la maintenance et la mise à jour du site et de la base de donnée mais aussi de l’attribution des privilèges aux employés et de l’ajout et la suppression des sessions utilisateurs.\\\\\\
+  \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=450pt,width=\linewidth]{images/admin1.jpg}}
+        \caption{Diagramme cas d'utilisations : Administration du système}
+        \label{a}
+    \end{figure}
+
+\newpage
+\subsection{Gestion des compartiments}
+La figure \ref{b} est lier avec celle de la \ref{a}, elle présente les détails du cas d’utilisations « Gestion des compartiments » qui inclus la gestion des directions et des services et aussi des projets et des chantiers de COSIDER CANALISATIONS.\\\\\\
+  \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=450pt,width=\linewidth]{images/admin3.jpg}}
+        \caption{Diagramme cas d'utilisations : Gérer compartiments}
+        \label{b}
+    \end{figure}
+
+\newpage
+\subsection{Dépôt et consultation de la DA}
+Cette figure (Figure-\ref{c}) montre qu’un employé-client peut effectuer de multiples opérations sur les DA\protect\footnote{Demande d'approvisionnement} (dépôt, consultation, emmètre des commentaires et suivi).\\\\\\
+  \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=260pt,width=\linewidth]{images/client.jpg}}
+        \caption{Diagramme cas d'utilisations : Dépôt et consultation des demandes}
+        \label{c}
+    \end{figure}
+
+\newpage
+\section{Modélisation des scénarios}
+Un diagramme de séquence est un diagramme d’interaction qui expose en détaille la façon dont les opérations sont effectués : quels messages sont envoyés et quand ils le sont.
+Ils sont organisés en fonction du temps, les objets impliqués dans l’opération sont répertoriés de gauche à droite en fonction du moment où ils prennent part dans la séquence de messages.
+
+\subsection{Authentification}
+L’utilisateur s’authentifie (Figure-\ref{d}) en insérant son login ainsi que son mot de passe, les données saisis sont envoyer au serveur qui effectue une vérification, si les donnés sont correcte l’utilisateur est redirigé vers l'espace convenu. En cas d’erreur un message sera affiché et l’utilisateur pourra s’authentifier à nouveau.\\\\\\
+  \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=400pt,width=\linewidth]{images/auth.jpeg}}
+        \caption{Diagramme de séquences : Authentification}
+        \label{d}
+    \end{figure}
+
+\newpage
+\subsection{Ajout d'un compte}
+L’administrateur se charge d’ajouter des nouveaux employés et de la création des comptes (Figure-\ref{e}), dans le cas ou le login est déjà utilisés ou que les champs sont mal remplis un message d’erreur appropriés serra affiché. Dans le cas contraire l’employé ou le compte seront ajouté à la base de données.\\\\\\
+  \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=460pt,width=\linewidth]{images/cmp.jpg}}
+        \caption{Diagramme de séquences : Ajout d'un compte}
+        \label{e}
+    \end{figure}
+
+
+\newpage
+\subsection{Dépôt et affectation de la DA}
+Le diagramme de séquence sur la figure \ref{f} présente le cheminement de la demande, de la création jusqu’à l’affectation vers un des employés désignés pour la prise en charge.\\\\\\
+  \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=430pt,width=\linewidth]{images/depotAffect.jpg}}
+        \caption{Diagramme de séquences : Dépôt et affectation des demandes}
+        \label{f}
+    \end{figure}
+
+\newpage
+\subsection{Cheminement et traitement de la DA}
+Les trois figures ci dessous (Figures : \ref{g},\ref{h},\ref{i}) représentent le cheminement d'une DA et les différents traitements qu'elle pourrais subir,
+l'employé chargé du traitement doit avant tout choisir le mode de passassions (Appel d'offre , Consultation).Ce choix sera suivi d'une procédure distinctive.\\\\\\
+  \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=500pt,width=\linewidth]{images/cheminement.jpg}}
+        \caption{Diagramme de séquences : Cheminement et traitement des demandes}
+        \label{g}
+    \end{figure}
+    \newpage
+     \begin{figure}[h]
+        \centering
+            \includegraphics[height=200pt,width=\linewidth]{images/ref_AO.png}
+        \caption{Procédure : Appel d'offre}
+        \label{h}
+    \end{figure} 
+
+    \begin{figure}[h]
+        \centering
+            \includegraphics[height=200pt,width=\linewidth]{images/ref_CL.png}
+        \caption{Procédure : Consultation}
+        \label{i}
+    \end{figure}
+
+\newpage
+\section{Modélisation des données}
+\subsection{Diagramme de classe}
+Il représente les classes intervenant dans le système. Le diagramme de classe est une représentation statique des éléments qui compose un système et de leurs relations.Chaque application serra une instance des différents classe qui le composent , à ce titre il faudra bien gardé à l'esprit qu'une classe est un modèle , et l'objet ça réalisation.
+\\
+    \begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=480pt,width=\linewidth]{images/classs.jpg}}
+        \caption{Diagramme de classe}
+    \end{figure}
+
+\textbf{NB:} une description détaillée des classes et des tables de la base de données est présentée dans les annexes \ref{a1} à partir de la page \pageref{a1} et \ref{a2} à partir de la page \pageref{a2}.
+\newpage
+\subsection{Modèle Relationnel de données}
+
+\begin{description}
+\vspace*{1cm}
+    \item \large{\textbf{Employé}} ( \ul{id\_employe} , nom\_employe , prenom\_employe , date\_naiss , lieu\_naiss, adresse , tel , email , grade , id\_service* )\\
+    \item \textbf{Compte} ( \ul{id\_compte} , nom\_utilisateur , mot\_de\_passe , id\_employe* )\\
+    \item \textbf{Direction} ( \ul{id\_direction} , nom\_direction )\\
+    \item \textbf{Service} ( \ul{id\_service} , nom\_service , id\_direction* )\\
+    \item \textbf{Projet} ( \ul{code\_projet} , description , id\_direction* )\\
+    \item \textbf{Chantier} ( \ul{code\_chantier} , localisation , remarque , code\_projet* )\\
+    \item \textbf{Dem\_appro} ( \ul{ref\_appro} , type\_prestation , design\_prestation , montant\_max,montant\_min, date\_insertion , dernier\_delai , code\_chantier*, id\_employe* )\\
+    \item \textbf{Affectation} ( \ul{ref\_appro* , id\_employe*} , date\_affectation , statut )\\
+    \item \textbf{Fournisseur} ( \ul{id\_fournisseur} , nom\_fournisseur , domaine , adresse , telephone, email , fax , contact )\\
+    \item \textbf{Operation} ( \ul{ref\_operation} , type\_operation , motif , comission , heur\_ouverture, nbr\_retraits , statut\_operation, ref\_appro* )\\
+    \item \textbf{Contrat} ( \ul{ref\_contrat} , design\_contrat , montant , device , date\_debut , id\_fournisseur*, ref\_operation* )\\
+    \item \textbf{Reg\_retrait} ( \ul{ref\_operation* , id\_fournisseur*} , dateTime\_retrait )\\
+\end{description}
+\vspace{0.7cm}
+\section{Conclusion}
+A cette phase du projet nous avons pus définir les différents acteurs et toute les fonctionnalités de notre système.\\
+Les diagrammes de cas d’utilisations, nous on permis de lister les tâches établis et cela on adoptant le point de vue des acteurs, tandis qu'on a réussi grâce aux diagrammes de séquence  de représenter les interactions entre les acteurs et le système selon un ordre chronologique.Et nous avons clôturé notre phase d'analyse et de conception par la représentation du diagramme de classe de notre base de données et le passage vers le modèle relationnel.\\
+L'étape suivante présente brièvement notre solution informatique et les différentes technologies utilisés.
+
+%Chapter Three Réalisation
+\chapter{Réalisation}
+\newpage
+\section{Introduction}
+Après avoir finalisé l’étape de conception, nous consacrons ce chapitre à la réalisation.\\
+Le problème a été profondément analysé, ce qui va nous permettre alors d’entreprendre le développement de l’application, ayant comme objectif d’aboutir à un produit final, exploitable par les différents utilisateurs.\\
+Nous allons d’abord présenter l’environnement de développement ainsi que les outils et les logiciels utilisés, et quelques interfaces graphiques de l’application réalisée.\\
+\section{Présentation de l’architecture 3-tiers}
+Une application Web possède souvent une architecture 3-tiers.\\
+\begin{description}
+    \item{\textbf{La couche DAO :}} " Data Access Object " s'occupe de l'accès aux données, le plus souvent des données persistantes au sein d'un SGBD.\\
+    \item{\textbf{La couche métier :}} implémente les algorithmes " métier " de l'application. Cette couche est indépendante de toute forme d'interface avec l'utilisateur.C'est généralement la couche la plus stable de l'architecture. Elle ne change pas si on change l'interface utilisateur ou la façon d'accéder aux données nécessaires au fonctionnement de l'application.\\
+    \item{\textbf{La couche interface utilisateur :}} interface (graphique souvent) qui permet à l'utilisateur de piloter l'application et d'en recevoir des informations.\\
+\end{description}
+
+\begin{figure}[h]
+        \centering
+            \includegraphics[width=\linewidth]{images/tier2.png}
+        \caption{Architecture 3-tiers}
+    \end{figure}
+
+\subsubsection*{Avantage de l'architecture multi-tiers }
+L'avantage principal d'une architecture 3-tiers (multi-tiers) est la facilité de déploiement.L'application en elle même n'est déployée que sur la partie serveur.\\Le client ne nécessite qu'une installation et une configuration minime.\\En effet il suffit d'installer un navigateur web compatible avec l'application pour que le client puisse accéder à l'application.\\Cette facilité de déploiement aura pour conséquence non seulement de réduire le coût de déploiement mais aussi de permettre une évolution régulière du système. Cette évolution ne nécessitera que la mise à jour de l'application sur le serveur applicatif.\cite{tier}
+
+
+\newpage
+\section{Présentation des outils de travail}
+\subsection{Serveurs}
+\begin{itemize}
+    \item \textbf{Apache :} c’est un serveur http crée en 1995, ce serveur peux interpréter plusieurs  langages PHP, Perl, Python et aussi le Ruby grâces à des modules supplémentaires.\\
+    \item \textbf{MySQL :} serveur de base de données relationnels gratuits et Open Source, souvent associés avec le PHP et Apache. MySQL utilise le langage standard des requêtes de base de données SQL.
+\end{itemize}
+\subsection{Logiciels}
+\begin{itemize}
+    \item \textbf{Sublime Text :} Sublime Text est un éditeur de texte générique codé en C++ et Python, disponible sur Linux, Mac et Windows. Le logiciel a été conçu tout d'abord comme une extension pour Vim.
+    Depuis la version 2.0, sortie en 2012, l'éditeur prend en charge 44 langages de programmation majeurs, tandis que des plugins sont souvent disponibles pour les langages plus rares.\cite{sublime}
+    \item \textbf{phpMyAdmin :} C'est une interface d'administration pour le SGBD MySQL.Il est écrit en langage \emph{php} et s'appuie sur le serveur HTTP Apache.\cite{phpmyadmin}
+\end{itemize}
+\subsection{Langages de programmations}
+\begin{itemize}
+    \item \textbf{PHP :} c’est un langage de script coté serveur conçu spécialement pour le web, PHP est inclus dans une page HTML et sera exécuté à chaque fois qu’un visiteur affichera la page. Il permet de créer des sites web dynamiques et faire des traitements qui seront exécutés au niveau du serveur web. Il  est gratuit et Open Source aussi, son principal atout est la simplicité de liaison avec des bases de données.\cite{web}\\ 
+    \item \textbf{HTML :} Apparu en 1991 lors du lancement du web, ce langage permet de créer des pages web et utilise des balises permettant la mise en forme du texte. Nécessite un navigateur web (Chrome, Mozilla, IE …) pour la visualisation.\cite{web}\\ 
+    \item \textbf{CSS :} Appelées aussi Feuilles de style, son rôle est de gérer l’apparence et le design de la page web, venu en 1996 pour compléter le HTML.\cite{css}\\
+    \item \textbf{JavaScript :} C’est un langage de script dont le code s’exécute coté client  et qui s’intègre parfaitement aux pages HTML pour créer de petites animations ou interagir avec l’utilisateur en temps réel, devenu indispensable.\cite{web}\\
+    \item \textbf{AJAX :} AJAX est apparu en 1995. Acronyme de "Asynchronous Javascript And Xml", c'est un ensemble de technologies destinées à réaliser de rapides mises à jour dans une page web sans la nécessité de la recharger. Les échanges client/serveur sont donc limités et les pages web sont enrichies plus rapidement.\\
+    \item \textbf{JQuery :} C'est une bibliothèque conçue pour simplifier l'écriture de codes JavaScript et AJAX. Créée en 2006 par John Resig, cette bibliothèque est la plus célèbre et la plus utilisée à ce jour.\cite{jquery}\\
+    \item \textbf{XML :} Le XML ou eXtensible Markup Language est un langage informatique de balisage générique. Ces balises permettent de structurer de manière hiérarchisée et organisée les données d'un document.\cite{xml}\\
+\end{itemize}
+
+\subsection{Sécurité de l'application}
+La sécurité en PHP tient en quelques mots : \textbf{\emph{Never Trust User Input} .}\\
+Littéralement et en français, ça veut dire « Ne jamais croire (faire confiance) aux entrées de l'utilisateur ».\\De notre cotés, on a essayé de prévoir toutes les dérives possibles de nos scripts et les
+empêcher, en utilisant l'extension PHP Data Objects (PDO) qui définit une excellente interface pour accéder à une base de données depuis PHP.\\ PDO nous a permis de contrôler touts les accès vers la BDD passant par les requêtes préparées à l'aide de la fonction \textbf{\emph{prepare()}}, elle empêche les injections SQL lorsqu'elle est correctement utilisé.\\Au niveau des formulaires on a essayer aussi de filtrer les données envoyées en POST par les utilisateurs avant de les ajouter dans la BDD, par le biais de la fonction \textbf{\emph{filter\_var()}}.\\Il est important de noter aussi que tout les mots de passes de notre système sont \emph{hasher}\footnote{permet de chiffrer et crypter la chaîne passer en paramètre} avant d'être stocker, cela rend la tâche d'un attaquant très difficile pour connaître le mot de passe original.
+%Pour la plupart des sites, c'est largement suffisant et sécurisé
+\section{Présentation de l'application}
+
+Notre solution informatique étant destinée aux employés de COSIDER CANALISATIONS, dispose de 4 menus. La redirection (après l’authentification) dépend de la fonction de l’utilisateur et des privilèges attribués lors de la création des comptes. Les pages contiennent un menu horizontal qui offre une accessibilité ainsi qu’une  visibilité complète sur les différents fonctionnalités proposés.\\
+Notre plate-forme est divisée comme suit :
+\begin{itemize}
+    \item \textbf{Menu Administrateur :} dispose de tous les privilèges possibles , accès au code source, gestion de la base de données et le suivi des différents opérations effectuées sur le site également.
+    \item \textbf{Menu Employé DAST :} destiné aux employés de la DAST , il permet la consultation et le traitement des DA plus quelques privilèges attribués lors de la création du compte.
+    \item \textbf{Menu Employé-Client :} conçu principalement pour le dépôt des DA , destiné aux employés des autres directions (DHC/DTH/DML/DMC) et ne dispose que de quelques privilèges.
+    \item \textbf{Menu Responsable :} fait spécialement pour le directeur de la DAST afin de permettre le suivi des différentes opérations et l'évaluation du rendement des équipes et des employés. 
+\end{itemize}
+\subsection{Espace Authentification}
+
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[height=150pt,width=320pt]{images/auth.png}}
+        \caption{Authentification}
+\end{figure}
+
+
+\newpage
+\subsection{Espace Administrateur}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/adminHOME.png}}
+        \caption{Menu Administrateur}
+        \label{1}
+\end{figure}
+\vspace{1cm}
+Cette page (Figure-\ref{1}) contient un menu sous forme de barre de navigation qui permet à l’administrateur d’accéder aux fonctionnalités suivantes :\\
+\begin{itemize}
+    \item \textbf{Gestion de la BDD :} pour la gestion des données, mise à jour des informations et nettoyage de la base.\\
+    \item \textbf{Demandes d'approvisionnements:} consultation, vérification et affectation des demandes.\\
+    \item \textbf{Boite à outils:} contient une page Profil, un lien vers la messagerie et une fonctionnalité supplémentaires -\textbf{\emph{Écrire un courrier}}- dans laquelle l’employé peut choisir la destination et l’objet de son courrier et il aura un modèle pré-rempli avec quelque champ à modifier.\\
+    \item \textbf{Fournisseur:} pour rechercher et ajouter dans la liste des fournisseurs.\\
+    \item \textbf{Agenda:} pour les tâches prévue avec des rappels selon les priorités et le délai de réalisation.\\
+\end{itemize}
+
+\newpage
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/LisEmp.png}}
+        \caption{Listes des employés}
+        \label{2}
+\end{figure}
+Sur cette page (Figure-\ref{2}) l'administrateur peut gérer les coordonnées des employés, il peut rechercher et modifier, mais aussi ajouter des nouveaux employés.
+\vspace{1.5cm}
+
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/affect.png}}
+        \caption{Affectation des demandes}
+        \label{3}
+\end{figure}
+Cette interface (Figure-\ref{3}) permet à l'administrateur d'affecter les demandes d'approvisionnements.Une liste des demandes non affectées est apparues dans un tableau, il suffit juste de choisir un employé dans une petite fenêtre qui s'affichera sur l'écran et la demande sera affectée.
+
+\newpage
+\subsection{Espace Direction Cliente (DHC / DML / DMC / DTH)}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/direction.png}}
+        \caption{Menu Direction}
+        \label{4}
+\end{figure}
+\vspace{0.4cm}
+Le menu sur la figure \ref{4} permet à l'employé\_client d’accéder aux fonctionnalités suivantes :
+\begin{itemize}
+    \item \textbf{Mes demandes :} pour consulter l'état d'avancement de toute les demandes établies.
+    \item \textbf{Nouvelle demande:} comme son nom l'indique, cette rubrique permet d'établir les nouvelles demandes.
+\end{itemize}
+\vspace{0.4cm}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/dem.png}}
+        \caption{Nouvelle demande}
+        \label{5}
+\end{figure}
+Ce formulaire (Figure-\ref{5}) contient toutes les informations nécessaires dans une demande d'approvisionnement, l'employé doit remplir les champs (obligatoires) et valider l'envoi.
+
+\newpage
+\subsection{Espace DAST}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/dast1.png}}
+        \caption{Menu DAST}
+        \label{6}
+\end{figure}
+\vspace{0.4cm}
+L'employé de la DAST possède un menu un peu particulier (Figure-\ref{6}), il contient :
+\begin{itemize}
+    \item \textbf{Mes demandes :} pour accéder aux demandes qui lui sont affectées et débuter le traitement de ces dernières.
+    \item \textbf{Suivi:} cette rubrique permet de faire le suivi tout au long du traitement des demandes jusqu'à la fin de l'opération.
+    \item \textbf{Historiques:} pour consulter les anciennes opérations, appels d'offres ou consultations.
+\end{itemize}
+
+\vspace{0.2cm}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/dast2.png}}
+        \caption{Mes demandes}
+        \label{7}
+\end{figure}
+Cette liste qui est sur la figure \ref{7} contient toutes les demandes affecté à l'employé propriétaire du compte, ce qui sont en cours du traitement, les demandes non traités et même celles qui été finalisés avec certains détails sur chaque demande.
+
+\newpage
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/cdc.png}}
+        \caption{Préparation du cahier des charges}
+        \label{8}
+\end{figure}
+Sur cette page (Figure-\ref{8}) l'employé pourra télécharger un modèle pré-rempli du cahier des charges on clickant sur la photo.
+
+\vspace{0.4cm}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/lancer.png}}
+        \caption{Attribution de la référence}
+        \label{9}
+\end{figure}
+Cette page (Figure-\ref{9}) permet à l'employé d'attribuer une référence à l’opération et l’insérer comme "en cours...".
+
+\newpage
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/retir.png}}
+        \caption{Retrait du cahier des charges}
+        \label{10}
+\end{figure}
+Une liste de tout les fournisseurs est affiché sur cette page (Figure-\ref{10}), quand un fournisseur existant retire le cahier des charges il vas être renseigner dans le système, s'il n'existe pas on l'ajoute et on revient pour renseigner le retrait.
+
+\vspace{0.4cm}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/final.png}}
+        \caption{Résultat de l'opération}
+        \label{11}
+\end{figure}
+L'employé doit définir la fructuosité de l’opération sur cette page (Figure-\ref{11}), s'il choisit "Fructueuse" il sera rediriger vers l’établissement du contrat sinon il renseigne le motif d'infructuosité.
+
+\newpage
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/contrat.png}}
+        \caption{Établissement du contrat}
+        \label{12}
+\end{figure}
+\vspace{0.2cm}
+Cette interface (Figure-\ref{12}) permet de renseigner les informations propre au contrat notamment le choix du fournisseur, du montant, de la devise, et de la date du début d’exécution.
+\subsection{Espace Responsable}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/res1.png}}
+        \caption{Menu Responsable}
+        \label{13}
+\end{figure}
+Le responsable de la DAST dispose d'un menu approprié (Figure-\ref{13}), il contient :
+\begin{itemize}
+    \item \textbf{Informations:} permet de consulter les listes des employés, des projets et des chantiers.
+    \item \textbf{Demande d'approvisionnement:} pour consulter toutes les demandes d'approvisionnements disponibles.
+    \item \textbf{Statistiques:} cette rubrique est faite spécialement pour le responsable, afin de mettre a ça disposition en temps réel des statistiques sur les potentialités, les opérations disponibles et le rendement des employés.
+\end{itemize}
+
+\newpage
+\vspace{1cm}
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/stat1.png}}
+        \caption{Statistiques : fournisseurs potentiels}
+        \label{14}
+\end{figure}
+Ce graphe qui est sur la figure \ref{14} représente les fournisseurs potentiels triés par ordre décroissant selon le nombre de retraits et le nombre de contrats établis.
+\vspace{1.5cm}
+
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/stat2.png}}
+        \caption{Statistiques : États des demandes}
+        \label{15}
+\end{figure}
+Ce diagramme circulaire -pie chart- (Figure-\ref{15}) nous donne une idée globale sur l'état d'avancement des demandes en temps réels.
+\newpage
+\begin{figure}[h]
+        \centering
+            \fbox{\includegraphics[width=\linewidth]{images/stat3.png}}
+        \caption{Statistiques : Rendements des employés}
+        \label{16}
+\end{figure}
+Le graphe sur la figure \ref{16}, permet au responsable de suivre le rendements des employés, et cela en nombres de demandes traités,en cours du traitements, non traités.
+\vspace{2cm}
+\section{Conclusion}
+Dans ce dernier chapitre, nous avons présenté brièvement notre solution informatique. Nous avons d’abord présenté l’architecture choisit, l’environnement de développement ainsi que les différents outils utilisés.
+Enfin nous avons donné une description de notre application avec quelques captures d'écrans.\\
+Bien que notre objectif a été atteint et des résultats ont été obtenus, nous pensons qu’il existe probablement des restrictions techniques surtout en ce qui concerne la sécurité du fait que ce soit un domaine nouveau pour nous.
+
+
+
+%conclusion
+\chapter*{Conclusion générale}
+Dans ce mémoire, nous avons présenté le travail qui nous a été confié dans le cadre de
+notre projet de fin d’études au sein de COSIDER CANALISATIONS et du département informatique de l'USTHB. Il s’agit de concevoir une application web dédié à la gestion du système d'informations de la direction des approvisionnements et de la sous-traitance.\\
+Le stage effectué au sein d'une équipe compétentes d'ingénieurs spécialisés dans le développement web, nous a permis en tant qu’étudiants, d’apprendre les principes de base de la discipline et de confronter au réel difficulté du domaine professionnel.\\
+Notre travail s’est focalisé, dans un premier temps, sur l'analyse des différents procédures,
+ce qui nous a permet de connaître d'une manière précise les réels besoins à prendre en charge.\\
+Cette étape nous a apporté de nombreuses connaissances sur les mécanismes suivis de manière générale et sur les acteurs impliqués et les tâches accomplis en particulier.
+En second lieu, notre étude à consisté à concevoir le système tout en suivant les méthodes étudier dans les différents modules de la génie des logiciels et les systèmes d'informations.Nous avons pus définir, à cette phase, les fonctionnalités de notre système d'une manière claire et précise.\\
+En dernier lieu, nous avons aborder la réalisations de l'application, son développement a aussi nécessité l’apprentissage de quelques langages de développement et certains outils et extensions indispensable.\\
+Notre objectif a été désormais atteint, puisque l’application que nous avons réalisée satisfait largement les principaux objectifs définis au préalable.\\
+Ce projet nous a été bénéfique sur plusieurs points. Il nous a permis :
+\begin{itemize}
+    \item D’aborder le domaine du développement web .
+    \item De se documenter et comprendre la notion d'un système de gestion informatique.
+    \item D’approfondir nos connaissances sur le PHP et le HTML.
+    \item D’apprendre de nouveau langages de programmations tel que JavaScript.
+    \item D'élargir nos connaissances dans la programmations orientés objets.
+    \item D’acquérir des connaissances sur les nouvelles technologies utilisé dans le web.
+    \item De se familiariser avec le langage de rédaction des rapports et des mémoires LATEX.
+    \item D’améliorer l’esprit du travail d’équipe.
+    \item D’acquérir une première expérience dans un milieu professionnel.\\
+\end{itemize}
+Nous avons cependant éprouvé certaines difficultés.Par exemple, pour acquérir les documents nécessaires lors de la phase d'étude.\\
+Toutefois, il est important de signaler que l'application conçue au cours de notre travail reste largement perfectible. En effet, elle peut être enrichie par de nouvelles fonctionnalités tel que la géolocalisation des chantiers, l’impression des contrats et des demandes et permettre le suivi du transit.
+%Ce stage très enrichissant, que nous avons effectué dans un milieu professionnel, ainsi et la quantité et la qualité des connaissances que nous avons acquises, ont conforté notre choix de poursuivre notre parcours universitaire et professionnel dans le domaine de l.........pas encore :p 
+
+%%%%%%%%%%%%%%%%%%%%%%
+\Large
+\bibliographystyle{unsrt}
+\bibliography{biblio}
+
+\appendix
+\chapter{Description des tables de la BDD}
+\pagenumbering{Roman}
+\label{a1}
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire}  \\
+            \hline
+            id\_employe & int(10) & Primaire + AUTO\_INCREMENT \\
+            \hline
+            nom\_employe & varchar(50) & \\
+            \hline
+            prenom\_employe & varchar(50) & \\
+            \hline
+            date\_naiss & date & \\
+            \hline
+            lieu\_naiss & varchar(120) & \\
+            \hline
+            adresse & varchar(120) & \\
+            \hline
+            tel & varchar(20) &\\
+            \hline
+            email & varchar(50) & \\
+            \hline
+            grade & int(1) & 1:Administrateur/2:Employe/3:Responsable\\
+            \hline
+            id\_service & int(3) & En relation: Service \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Employe}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire}  \\
+            \hline
+            id\_compte & int(10) & Primaire + AUTO\_INCREMENT \\
+            \hline
+            nom\_compte & varchar(50) & \\
+            \hline
+            mot\_de\_passe & varchar(100) & \\
+            \hline
+            id\_employe & int(10) & En relation: Employe \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Compte}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire}  \\
+            \hline
+            id\_direction & int(5) & Primaire + AUTO\_INCREMENT \\
+            \hline
+            nom\_direction & varchar(20) & \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Direction}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire}  \\
+            \hline
+            id\_service & int(3) & Primaire + AUTO\_INCREMENT \\
+            \hline
+            nom\_service & varchar(100) &  \\
+            \hline
+            id\_direction & int(5) & En relation: Direction \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Service}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire} & \textbf{Codification} \\
+            \hline
+            code\_projet & varchar(30) & Primaire & Définie par l'entreprise \\
+            \hline
+            description & text &  &\\
+            \hline
+            id\_direction & vint(5) & En relation: Direction &\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Projet}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire} & \textbf{Codification} \\
+            \hline
+            code\_chantier & varchar(30) & Primaire & Définie par l'entreprise \\
+            \hline
+            localisation & varchar(100) &  &\\
+            \hline
+            remarque & text &  &\\
+            \hline
+            code\_projet & varchar(30) & En relation: Projet &\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Chantier}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire} & \textbf{Codification} \\
+            \hline
+            ref\_appro & varchar(50) & Primaire & num.séq/DAST/aaaa \\
+            \hline
+            type\_prestation\_employe & varchar(100) & &\\
+            \hline
+            design\_prestation & varchar(50) & &\\
+            \hline
+            montant\_max & double & &\\
+            \hline
+            montant\_mni & double & &\\
+            \hline
+            date\_insertion & date & &\\
+            \hline
+            dernier\_delai & date & &\\
+            \hline
+            code\_chantier & varchar(30) & &\\
+            \hline
+            id\_employe & int(10) & En relation: Employe &\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Dem\_appro}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire}  \\
+            \hline
+            ref\_appro & varchar(50) & En relation: Dem\_appro + primaire  \\
+            \hline
+            id\_employe & int(10) & En relation: Employe + primaire \\
+            \hline
+            date\_affectation & datetime &\\
+            \hline
+            statut & int(1) & 1: Non traitée/2: En cours/3: Traitée \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Affectation}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire}  \\
+            \hline
+            id\_fournisseur & int(15) & Primaire + AUTO\_INCREMENT \\
+            \hline
+            nom\_fournisseur & varchar(100) &\\
+            \hline
+            domaine\_activite & text &\\
+            \hline
+            adresse & varchar(150) &\\
+            \hline
+            email & varchar(50) &\\
+            \hline
+            tel & varchar(20) &\\
+            \hline
+            fax &  varchar(20) &\\
+            \hline
+            contact & varchar(100) & \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Fournisseur}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|} 
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire} & \textbf{Codification} \\
+            \hline
+            ref\_operation & varchar(50) & Primaire & num.séq/aa(AO/CL)/code\_chantier\\
+            \hline
+            type\_operation & int(1) & 1: appel\_offre/2: consultation &\\
+            \hline
+            designation & text & &\\
+            \hline
+            comission & varchar(100) & &\\
+            \hline
+            heur\_ouverture & time & &\\
+            \hline
+            nbr\_retraits & int(30) & &\\
+            \hline
+            statut\_operation & int(1) & 1: Fructueuse/2: Infructueuse  &\\
+            \hline
+            ref\_appro & varchar(50) & En relation: Dem\_appro &\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Operation}
+\end{table}
+
+\begin{table}[t!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire} & \textbf{Codification} \\
+            \hline
+            ref\_contrat & varchar(100) & Primaire & Cnum.séq/direction/aaaa\\
+            \hline
+            desig\_contrat & text & &\\
+            \hline
+            montant & double & &\\
+            \hline
+            device & varchar(50) & &\\
+            \hline
+            date\_debut & date & &\\
+            \hline
+            id\_fournisseur & int(30) & En relation: Fournisseur &\\
+            \hline
+            ref\_operation & varchar(50) & En relation: Operation &\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Contrat}
+\end{table}
+
+\begin{table}[t!]
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Nom} & \textbf{Type} & \textbf{Commentaire}  \\
+            \hline
+            ref\_operation & varchar(50) & En relation: Operation + primaire  \\
+            \hline
+            id\_fournisseur & int(30) & En relation: Fournisseur + primaire \\
+            \hline
+            dateTime\_retrait & datetime &  \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Table Reg\_retrait}
+\end{table}
+
+\chapter{Description des Classes}
+\label{a2}
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_employe() & Créer un nouvel employé\\
+            \hline
+            delete\_employe()  & Supprimer un employé exsitant\\
+            \hline
+            update\_employe()  & Modifier un employé existant\\
+            \hline
+            filter\_info\_employe() & filtrer les informations d'un employé avant la création\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Employe}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_compte() & Créer un compte utilisateur pour un nouvel employé\\
+            \hline
+            delete\_compte()  & Supprimer un compte existant\\
+            \hline
+            update\_compte()  & Modifier les informations d'un compte\\
+            \hline
+            change\_mdp() & Changer le mot de passe\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Compte}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_direction() & Créer une nouvelle direction \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Direction}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_service() & Ajouter un nouveau service \\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Service}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_projet() & Ajouter un nouveau projet\\
+            \hline
+            delete\_projet()  & Supprimer un des projet existant\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Projet}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_chantier() & Créer un nouveau chantier\\
+            \hline
+            delete\_chantier()  & Supprimer un chantier\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Chantier}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_demAppro() & Inserer une nouvelle demande\\
+            \hline
+            affect\_demAppro()  & Affecter les demandes, destinée à l'administrateur de l'application\\
+            \hline
+            treatement\_demAppro()  & Contient tout les traitements possible sur les demandes d'approvisionnements\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Dem\_appro}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_fournisseur() & Ajouter un nouveau fournisseur\\
+            \hline
+            update\_fournisseur()  & Modifier les informations d'un fournisseur existant\\
+            \hline
+            show\_demAppro()  & Afficher les informations d'un fournisseur\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Fournisseur}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_operation() & Créer une opération\\
+            \hline
+            operation\_infruct()  & traitement d'une opération infructueuse\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Operation}
+\end{table}
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Methode} & \textbf{Commentaire}  \\
+            \hline
+            insert\_contrat() & Créer un nouvel contrat\\
+            \hline
+        \end{tabular}
+    \end{center}
+\caption{Classe Contrat}
+\end{table}
+
+
+
+
+\end{document}
